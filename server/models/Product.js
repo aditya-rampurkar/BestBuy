@@ -1,0 +1,77 @@
+const mongoose = require("mongoose")
+
+const ProductSchema = new mongoose.Schema({
+	name:{
+		type:String,
+		required:true,
+		trim:true
+	},
+	color:{
+		type:String,
+		required:true,
+		trim:true
+	},
+	ram:{
+		type:String,
+		required:true
+	},
+	rom:{
+		type:String,
+		required:true
+	},
+	price:{
+		type:String,
+		required:true
+	},
+	qty:{
+		type:String,
+		required:true,
+		default:1
+	},
+	displaySize:{
+		type:String,
+		required:true
+	},
+	frontCamera:{
+		type:String,
+		required:true
+	},
+	rearCamera:{
+		type:String,
+		required:true
+	},
+	battery:{
+		type:String,
+		required:true
+	},
+	processor:{
+		type:String,
+		required:true
+	},
+	imageUrl:{
+		type:String,
+		required:true
+	},
+	modelNumber:{
+		type:String,
+		required:true
+	},
+	modelName:{
+		type:String,
+		required:true
+	},
+	operatingSystem:{
+		type:String,
+		required:true
+	},
+	warrenty:{
+		type:String,
+		required:true
+	},
+	addDate:{
+		type:String,
+		required:true
+	}
+})
+
+module.exports = mongoose.model('Product',ProductSchema)

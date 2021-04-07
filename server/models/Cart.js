@@ -1,0 +1,68 @@
+const mongoose = require('mongoose')
+
+const CartSchema = new mongoose.Schema({
+	userId:{
+		type:String
+	},
+	totalAmount:{
+		type:Number,
+		default:0
+	},
+	items:[
+		{
+			productId:{
+				type:String
+			},
+			productQty:{
+				type:Number
+			},
+			name:{
+				type:String
+			},
+			price:{
+				type:Number
+			},
+			color:{
+				type:String
+			},
+			ram:{
+				type:String
+			},
+			rom:{
+				type:String
+			},
+			displaySize:{
+				type:String
+			},
+			rearCamera:{
+				type:String
+			},
+			frontCamera:{
+				type:String
+			},
+			operatingSystem:{
+				type:String
+			},
+			battery:{
+				type:String
+			},
+			processor:{
+				type:String
+			},
+			imageUrl:{
+				type:String
+			},
+			warrenty:{
+				type:String
+			},
+			modelName:{
+				type:String
+			},
+			modelNumber:{
+				type:String
+			}
+		}
+	]
+})
+
+module.exports = mongoose.model('Cart',CartSchema)
