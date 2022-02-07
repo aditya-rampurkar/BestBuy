@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useContext, useEffect,useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,11 +9,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display:"flex",
+    justifyContent:"center",
     flexGrow: 1,
     marginTop:30,
     padding: theme.spacing(1),
-    width:"80%",
-    marginLeft:"7%"
+    width:"100%",
   },
   
   control: {
@@ -24,14 +25,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Home() {
+export default function Home(props) {
   const classes = useStyles();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const [search,setSearch] = useState([]);
 
   const productsStatus = useSelector(state=>state.products.status)
   const products = useSelector(state=>state.products.products)
   // console.log("Dummy Data:",products)
+
+
 
   useEffect(()=>{
     if(productsStatus === 'idle'){
@@ -40,15 +45,27 @@ export default function Home() {
     
   },[productsStatus,dispatch,products])
 
+  useEffect(()=>{
+    const arr = localStorage.getItem("search");
+    setSearch(JSON.parse(arr));
+  
+  },[search])
+
+
+
   return (
        <Paper className={classes.root}>
-       <Grid container className={classes.gridClass}>
+           
+       <Grid container className={classes.gridClass} style={{justifyContent:"center",overflowX:"hidden"}}>
 
-      {products.length>0?products.map(phone=>(
+      {console.log(search)}
+      {search.length>0?search.map(phone=>(
 
             <Product key={phone._id} phone={phone}/>
 
-        )):<CircularProgress/>}
+        )):<h1 style={{color:"#1976d2"}}>Match Not Found</h1>}
+
+    
 
 
        </Grid>

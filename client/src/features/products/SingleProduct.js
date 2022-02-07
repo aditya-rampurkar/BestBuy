@@ -13,17 +13,14 @@ import {addItemInCartAction} from '../cart/cartSlice'
 import {Link} from 'react-router-dom'
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    // marginLeft:30,
     marginTop:40
   },
   root1:{
-    maxWidth:800,
     marginTop:40
   },
    media:{
     width:154,
-    paddingLeft:80,
+    // paddingLeft:80,
     paddingTop:35,
     paddingBottom:20
   }
@@ -54,23 +51,14 @@ export default function SingleProduct({match}) {
     }
   }
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={{width:"100%",display:"flex",justifyContent:"center"}}>
       <Grid item xs={12} sm={5} md={4}>
-        <Card className={classes.root}>
-        <CardMedia
-          classes={{
-            media:classes.media
-          }}
-          component="img"
-          alt={product.name}
-          image={product.imageUrl}
-          title={product.name}
-        />
-      
+        <Card className={classes.root} style={{display:"flex",justifyContent:"center",height:"100%"}}>
+          <img style={{width:200,paddingTop:35,paddingBottom:20}} src={product.imageUrl} />
     </Card>
     </Grid>
     <Grid item xs={12} sm={7} md={8}>
-      <Card className={classes.root1}>
+      <Card className={classes.root1} style={{height:"100%"}}>
         <CardContent>
           <Typography gutterBottom variant="h5" >
             {product.name ? product.name :"Not Available"} {product.modelName? product.modelName:" "}({product.color? product.color:"Not Available"},{product.rom? `${product.rom} GB`:"Not Available"})({product.ram? `${product.ram} GB RAM`:"Not Available"})

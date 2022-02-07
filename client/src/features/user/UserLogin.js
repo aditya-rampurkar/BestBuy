@@ -60,7 +60,7 @@ export default function UserLogin() {
   const [error,setError] = useState("")
   const [success,setSuccess] = useState(false)
 
-  const handleEmailChanged = e => setEmail(e.target.value)
+  const handleEmailChanged = e => {setEmail(e.target.value)}
   const handlePasswordChanged = e => setPassword(e.target.value)
 
   const handleSubmit = e =>{

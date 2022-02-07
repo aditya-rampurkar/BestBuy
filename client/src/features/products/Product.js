@@ -7,24 +7,29 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {addItemInCartAction} from '../cart/cartSlice'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width:185,
     margin:10,
-    padding:18
+    padding:10,
+    alignItems:"center"
   },
   media:{
     width:100,
+    height:200,
     paddingLeft:50,
+    objectFit:"contain",
   }
 });
 
 export default function Product({phone}) {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const history = useHistory();
 
   const isLoggedIn = useSelector(state=>state.user.isLoggedIn)
 
@@ -47,7 +52,8 @@ export default function Product({phone}) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <Link to = {`/product/${phone._id}`}>
+      <CardActionArea style={{height:"86%"}}>
         <CardMedia
           classes={{
             media:classes.media
@@ -58,7 +64,7 @@ export default function Product({phone}) {
           title={phone.name}
         />
         
-        <CardContent>
+        <CardContent style={{textAlign:"center"}}>
           <Typography gutterBottom variant="h5" component="h2">
             {phone.name}
           </Typography>
@@ -67,15 +73,14 @@ export default function Product({phone}) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={handleAddCart}>
-          <Link to={`/cart`} style={{color:"#3f51b5",textDecoration:"none",outline:"none"}}>Add Cart</Link>
-         
-        </Button>
-        <Button size="small" color="primary">
-          <Link to={`/product/${phone._id}`} style={{color:"#3f51b5",textDecoration:"none",outline:"none"}}>Learn More</Link>
+      </Link>
+
+      <CardActions style={{display:"flex",justifyContent:"center"}}>
+        <Button style={{ backgroundColor: '#1976d2' }} size="small" variant="contained" onClick={handleAddCart} startIcon={<ShoppingCartIcon style={{color:"#fff"}}/>}>
+          <span style={{color:"#fff",textDecoration:"none",outline:"none"}}>Add Cart</span>
         </Button>
       </CardActions>
+    
     </Card>
   );
 }

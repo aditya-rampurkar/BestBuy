@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{createContext, useEffect, useState} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,10 +18,10 @@ import {onSearch} from '../features/products/ProductsSlice'
 import HomeIcon from '@material-ui/icons/Home';
 import {userLogout} from './helper/index'
 import {onLogout} from '../features/user/userSlice'
+import {fetchProducts} from '../features/products/ProductsSlice'
 const useStyles = makeStyles((theme) => ({
   AppBar:{
     backgroundColor:"#1976d2"
-
   },
   grow: {
     flexGrow: 1,
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
-    
   },
   search: {
     position: 'relative',
@@ -89,7 +88,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const [searchItem,setSearchItem] = useState("")
+  const [search,setSearch] = useState([]);
   const dispatch = useDispatch()
+ 
+
+  const productsStatus = useSelector(state=>state.products.status)
+  const products = useSelector(state=>state.products.products)
+
+  
 
   const itemsInCart = useSelector(state=>state.cart.cart)
   // const totalItems = useSelector(state=>state.products)
@@ -104,7 +110,23 @@ export default function Navbar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleSearchItemChanged = (e) => setSearchItem(e.target.value)
+
+  const handleSearchItemChanged = (e) =>{
+    setSearchItem(e.target.value);
+  
+
+    const searchData = products.filter((val)=>{
+      const name = val.name.toString();
+      const model = val.modelName.toString();
+      const searchdata = name + " " + model;
+      return searchdata.toLowerCase().includes(e.target.value.toLowerCase());
+    })
+
+  
+
+    localStorage.setItem("search",JSON.stringify(searchData));
+
+  } 
 
   const keyPress = (e)=>{
     if(e.keyCode === 13){
@@ -140,6 +162,7 @@ export default function Navbar() {
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
+    
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -163,6 +186,7 @@ export default function Navbar() {
       
       
     </Menu>
+    
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -180,7 +204,6 @@ export default function Navbar() {
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={itemsInCart.length} color="secondary">
                   <Link to={`/cart`} style={{color:"#3f51b5",textDecoration:"none",outline:"none"}}><ShoppingCartIcon style={{color:"black"}}/></Link>
-            
           </Badge>
         </IconButton>
         <p>Items</p>
@@ -220,7 +243,7 @@ export default function Navbar() {
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link to="/" style={{color:"white",textDecoration:"none",outline:"none"}}>
-            Apni Dukan
+            BestBuy
             </Link>
           </Typography>
           <div className={classes.search}>
