@@ -4,7 +4,7 @@
 
 ```bash
 # Clone this repository
-https://github.com/vikassharma1999/Apni-Dukan.git
+https://github.com/Demonvip/BestBuy.git
 
 # Install dependencies for backend
 Open a new terminal in your system and go to inside server folder and then type following command:
