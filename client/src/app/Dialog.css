@@ -1,0 +1,6 @@
+.dialog{
+    position:absolute;
+    border: 2px solid black;
+    max-width: 10px;
+    overflow: hidden;
+}

@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import {listAllItemsOfCartAction} from './cartSlice'
 import {Redirect} from 'react-router-dom'
 import ContactForm from './ContactForm'
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -79,7 +81,9 @@ export default function CartHome() {
                 </Button>
               </li>
             </ul>
-            </div>):(<p>No product here</p>)
+            </div>):(
+              <p style={{textAlign:"center",fontSize:"20px",padding:"10px",background:"rgba(0,0,255,0.2)"}}>No product here</p>
+            )
           }
         </Paper>):(<Redirect to="/auth/login"/>)}
     </React.Fragment>

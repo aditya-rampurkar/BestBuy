@@ -13,7 +13,7 @@ export const fetchProducts = createAsyncThunk(
     async ()=>{
         // console.log("User Id inside fetchTasks: ",userId)
         const response = await allProducts()
-        // console.log("response::",response)
+        console.log("response::",response)
         return response
     }
 )

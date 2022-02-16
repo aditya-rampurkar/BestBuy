@@ -41,19 +41,12 @@ export default function UserProfile({product}) {
   const isLoggedIn = useSelector(state=>state.user.isLoggedIn)
   const userData = useSelector(state=>state.user.isLoggedIn.user)
   const [orders,setOrders] = useState()
-  // useEffect(async()=>{
-  //   if(isLoggedIn){
-  //     const result = await listAllOrders(isLoggedIn.user._id)
-  //     if(result && result.order)
-  //     {
-  //       setOrders(result.order)
-  //     }
-  //   }
-  // },[isLoggedIn])
+
   useEffect(()=>{
     async function fetchData(){
       if(isLoggedIn){
-        const result = await listAllOrders(isLoggedIn.user._id)
+        console.log(isLoggedIn.user._id.toString())
+        const result = await listAllOrders(isLoggedIn.user._id.toString())
         if(result && result.order)
         {
           setOrders(result.order)
@@ -62,7 +55,7 @@ export default function UserProfile({product}) {
     }
     fetchData()
   },[isLoggedIn])
-  // console.log("setOrders",orders)
+ 
   return (
     <React.Fragment>
     {isLoggedIn?(

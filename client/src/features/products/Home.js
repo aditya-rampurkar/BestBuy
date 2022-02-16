@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop:30,
     padding: theme.spacing(1),
     width:"100%",
+    maxWidth:"1475px"
   },
   
   control: {
@@ -30,11 +31,9 @@ export default function Home(props) {
 
   const dispatch = useDispatch();
 
-  const [search,setSearch] = useState([]);
-
   const productsStatus = useSelector(state=>state.products.status)
   const products = useSelector(state=>state.products.products)
-  // console.log("Dummy Data:",products)
+
 
 
 
@@ -45,12 +44,6 @@ export default function Home(props) {
     
   },[productsStatus,dispatch,products])
 
-  useEffect(()=>{
-    const arr = localStorage.getItem("search");
-    setSearch(JSON.parse(arr));
-  
-  },[search])
-
 
 
   return (
@@ -58,15 +51,9 @@ export default function Home(props) {
            
        <Grid container className={classes.gridClass} style={{justifyContent:"center",overflowX:"hidden"}}>
 
-      {console.log(search)}
-      {search.length>0?search.map(phone=>(
-
-            <Product key={phone._id} phone={phone}/>
-
-        )):<h1 style={{color:"#1976d2"}}>Match Not Found</h1>}
-
-    
-
+        {products.map((phone,i)=>(
+            <Product key={i} phone={phone}/>
+        ))}
 
        </Grid>
        

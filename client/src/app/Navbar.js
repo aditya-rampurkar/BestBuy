@@ -12,16 +12,21 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import {Link} from 'react-router-dom'
+import {Link, useRouteMatch} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import {onSearch} from '../features/products/ProductsSlice'
 import HomeIcon from '@material-ui/icons/Home';
 import {userLogout} from './helper/index'
 import {onLogout} from '../features/user/userSlice'
 import {fetchProducts} from '../features/products/ProductsSlice'
+import './Dialog.css'
+
+import { useHistory } from 'react-router-dom';
+import SearchBar from './SearchBar';
 const useStyles = makeStyles((theme) => ({
   AppBar:{
-    backgroundColor:"#1976d2"
+    backgroundColor:"#1976d2",
+    height:"80px",
   },
   grow: {
     flexGrow: 1,
@@ -33,43 +38,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
     },
   },
   sectionDesktop: {
@@ -88,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const [searchItem,setSearchItem] = useState("")
-  const [search,setSearch] = useState([]);
   const dispatch = useDispatch()
  
 
@@ -111,22 +78,10 @@ export default function Navbar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 
-  const handleSearchItemChanged = (e) =>{
-    setSearchItem(e.target.value);
-  
+  const history = useHistory();
 
-    const searchData = products.filter((val)=>{
-      const name = val.name.toString();
-      const model = val.modelName.toString();
-      const searchdata = name + " " + model;
-      return searchdata.toLowerCase().includes(e.target.value.toLowerCase());
-    })
 
   
-
-    localStorage.setItem("search",JSON.stringify(searchData));
-
-  } 
 
   const keyPress = (e)=>{
     if(e.keyCode === 13){
@@ -228,7 +183,7 @@ export default function Navbar() {
   return (
     <div className={classes.grow}>
 
-      <AppBar position="static" className={classes.AppBar}>
+      <AppBar position="relative" className={classes.AppBar}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -246,22 +201,8 @@ export default function Navbar() {
             BestBuy
             </Link>
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              value={searchItem}
-              onChange={handleSearchItemChanged}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onKeyDown={keyPress}
-            />
-            
+          <div>
+          <SearchBar/>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -299,6 +240,7 @@ export default function Navbar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+     
     </div>
   );
 }

@@ -3,8 +3,9 @@ const Cart = require('../models/Cart')
 
 module.exports.getAllOrders = async (req,res)=>{
 	const userId = req.params.userId
-	const order = await Order.findOne({userId}).populate('order')
-	res.send(order)
+	const orders = await Order.findOne({userId}).populate('order')
+	console.log(orders)
+	res.send(orders)
 }
 
 module.exports.newOrder = async (req,res)=>{

@@ -11,6 +11,10 @@ import {Link, useHistory} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {addItemInCartAction} from '../cart/cartSlice'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const useStyles = makeStyles({
   root: {
     width:185,
@@ -41,7 +45,9 @@ export default function Product({phone}) {
       const {user} = isLoggedIn
       // console.log("User Id:",user._id)
       // console.log("Phone::",phone)
-      dispatch(addItemInCartAction({userId:user._id,item:phone}))
+      dispatch(addItemInCartAction({userId:user._id,item:phone}));
+      toast(`${phone.name} ${phone.modelName} added to Cart`);
+
     }
     else{
       // console.log("here aaya")
@@ -51,6 +57,8 @@ export default function Product({phone}) {
 
 
   return (
+    <>
+    <ToastContainer/>
     <Card className={classes.root}>
       <Link to = {`/product/${phone._id}`}>
       <CardActionArea style={{height:"86%"}}>
@@ -66,7 +74,7 @@ export default function Product({phone}) {
         
         <CardContent style={{textAlign:"center"}}>
           <Typography gutterBottom variant="h5" component="h2">
-            {phone.name}
+            {phone.name}{" "}{phone.modelName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="h3">
            Price: ₹{phone.price}
@@ -82,5 +90,6 @@ export default function Product({phone}) {
       </CardActions>
     
     </Card>
+    </>
   );
 }

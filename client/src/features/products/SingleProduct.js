@@ -54,17 +54,17 @@ export default function SingleProduct({match}) {
     <Grid container spacing={2} style={{width:"100%",display:"flex",justifyContent:"center"}}>
       <Grid item xs={12} sm={5} md={4}>
         <Card className={classes.root} style={{display:"flex",justifyContent:"center",height:"100%"}}>
-          <img style={{width:200,paddingTop:35,paddingBottom:20}} src={product.imageUrl} />
+          <img style={{width:200,paddingTop:35,paddingBottom:20}} src={product?.imageUrl} />
     </Card>
     </Grid>
     <Grid item xs={12} sm={7} md={8}>
       <Card className={classes.root1} style={{height:"100%"}}>
         <CardContent>
           <Typography gutterBottom variant="h5" >
-            {product.name ? product.name :"Not Available"} {product.modelName? product.modelName:" "}({product.color? product.color:"Not Available"},{product.rom? `${product.rom} GB`:"Not Available"})({product.ram? `${product.ram} GB RAM`:"Not Available"})
+            {product.name ? product?.name :"Not Available"} {product.modelName? product.modelName:" "}({product.color? product.color:"Not Available"},{product.rom? `${product.rom} GB`:"Not Available"})({product.ram? `${product.ram} GB RAM`:"Not Available"})
           </Typography>
           <Typography  variant="h4"  >
-           Price: ₹{product.price ? product.price : "Not Available"}
+           Price: ₹{product.price ? product?.price : "Not Available"}
           </Typography>
 
            <Typography variant="body2" color="textSecondary" component="h3" style={{marginTop:20,marginBottom:20}}>

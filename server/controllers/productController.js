@@ -12,7 +12,10 @@ module.exports.addProduct = (req,res)=>{
 
 module.exports.listAllProducts = (req,res)=>{
 	Product.find(function(err,result){
-		if(err) throw err
+		if(err){
+			console.log(err)
+			throw err
+		}
 		res.json(result)
 	})
 }
@@ -40,4 +43,42 @@ module.exports.deleteProduct = (req,res)=>{
 		// console.log("Response::",result)
 		return res.json(result)
 	})
+}
+
+module.exports.searchProducts = async(req,res)=>{
+let search = req.query.search;
+
+let searchObj = {}
+if (search)
+	searchObj = {
+		$or: [{
+			name: {
+				$regex: search,
+				$options:"i"
+			}
+		},
+		{
+			modelName:{
+				$regex:search,
+				$options:"i"
+			}
+		}
+	]
+	}
+searchObj = {
+	...searchObj,
+}
+
+
+try {
+	
+	let products = await Product.find(searchObj)
+		
+	const result = {
+		products: products,
+	}
+	res.send(result)
+} catch (e) {
+	console.log(e)
+}
 }

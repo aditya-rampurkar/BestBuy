@@ -36,3 +36,145 @@
     transform: rotate(360deg);
   }
 }
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: -10px;
+  left: 400px;
+  width: 40em;
+  height: 3.5em;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #eee;
+}
+
+.search-select-bar {
+  height: 3.5em;
+  margin-top: 20px;
+  background-color: #fff;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border: none;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+  text-align: center;
+}
+
+.search-input-container {
+  width: 100%;
+  min-height: 3em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 2px;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  color: #12112e;
+  background-color: transparent;
+  padding: 2px 6px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-input:focus::placeholder {
+  opacity: 0;
+}
+
+.search-input::placeholder {
+  color: #bebebe;
+  transition: all 250ms ease-in-out;
+}
+
+.search-input-container .search-icon {
+  color: #bebebe;
+  font-size: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.search-input-container .close-icon {
+  color: #bebebe;
+  font-size: 18px;
+  margin-left: 5px;
+  vertical-align: middle;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+}
+
+.search-input-container .close-icon:hover {
+  color: #dfdfdf;
+}
+
+.search-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 2;
+}
+
+.line-separator {
+  display: flex;
+  min-width: 100%;
+  height: 2px;
+  background-color: #d8d8d878;
+}
+
+.loading-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.loading-wrapper.mobile {
+  height: 100vh;
+}
+
+.search-product-container {
+  width: 100%;
+  height: 5em;
+  display: flex;
+  border-bottom: 1px solid #d8d8d852;
+  padding: 6px 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-product-container.mobile {
+  height: unset;
+  font-size: 12px;
+}
+
+.search-product-container:hover {
+  background-color: #eee;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 40px;
+  display: flex;
+}
+
+.search-product-name {
+  font-size: 13.5px;
+  color: #000;
+  margin-left: 2px;
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+}
