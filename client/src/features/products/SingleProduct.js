@@ -10,7 +10,8 @@ import {useSelector} from 'react-redux'
 import Grid from '@material-ui/core/Grid';
 import {useDispatch} from 'react-redux'
 import {addItemInCartAction} from '../cart/cartSlice'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 const useStyles = makeStyles({
   root: {
     marginTop:40
@@ -81,6 +82,7 @@ export default function SingleProduct({match}) {
             <li>{product.processor? product.processor:"Not Available"}</li>
             <li>Operating System: {product.operatingSystem? product.operatingSystem:"Not Available"}</li>
             <li>Launch Date: {product.addDate? product.addDate:"Not Available"}</li>
+            <li>Review: <a href="https://google.com" target="_blank">Link</a></li>
            </ul>
           
           </Typography>

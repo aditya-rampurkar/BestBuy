@@ -8,7 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {addNewOrder} from '../../app/helper/index'
 import {removeAllItemsFromCartAction} from './cartSlice'
-import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ContactForm({open,setOpen,userId}) {
   const dispatch = useDispatch()
@@ -27,6 +29,15 @@ export default function ContactForm({open,setOpen,userId}) {
   const handleOrder = ()=>{
     // console.log("Address",address)
     // console.log("Mobile",mobileNumber)
+
+    if(mobileNumber.trim() === ""  || address.trim() === ""){ 
+      return toast.error("All fields are required!");
+    }
+
+    if(mobileNumber.length < 10 || mobileNumber.length > 10){ 
+      return toast.error("Invalid mobile number");
+    }
+
     const contact={
       phoneNumber:mobileNumber,
       address
@@ -51,8 +62,10 @@ export default function ContactForm({open,setOpen,userId}) {
   return (
     <div>
       
+     
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Contact Details</DialogTitle>
+        <ToastContainer/>
         <DialogContent>
           <DialogContentText>
             Please add your conatct number and Address so that we can deliver your product to you.
@@ -78,6 +91,7 @@ export default function ContactForm({open,setOpen,userId}) {
             required
           />
         </DialogContent>
+       
         <DialogActions>
          
           <Button  color="primary" onClick={handleClose}>
@@ -89,6 +103,7 @@ export default function ContactForm({open,setOpen,userId}) {
           </Button>
         </DialogActions>
       </Dialog>
+ 
     </div>
   );
 }

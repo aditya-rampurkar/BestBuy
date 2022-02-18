@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  useLocation
 } from 'react-router-dom'
 
 import Navbar from './app/Navbar'
@@ -16,12 +17,15 @@ import CartHome from './features/cart/CartHome'
 import UserProfile from './features/user/UserProfile'
 import AdminDashboard from './features/admin/AdminDashboard'
 import ContactForm from './features/cart/ContactForm'
+import Search from './features/products/Search'
 const App = () => {
 
   return (
     <div>
       <Router>
-        <Navbar/>
+        
+          <Navbar/>
+        
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/auth/login" component={UserLogin}/>
@@ -33,6 +37,7 @@ const App = () => {
           <Route exact path="/user" component={UserProfile}/>
           <Route exact path="/admin" component={AdminDashboard}/>
           <Route exact path="/order" component={ContactForm}/>
+          <Route exact path="/search" component={Search}/>
         </Switch>
       </Router>
      

@@ -20,9 +20,11 @@ import {userLogout} from './helper/index'
 import {onLogout} from '../features/user/userSlice'
 import {fetchProducts} from '../features/products/ProductsSlice'
 import './Dialog.css'
+import { useMediaQuery } from 'react-responsive'
 
 import { useHistory } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import Search from '@material-ui/icons/Search';
 const useStyles = makeStyles((theme) => ({
   AppBar:{
     backgroundColor:"#1976d2",
@@ -116,6 +118,9 @@ export default function Navbar() {
   };
 
   const menuId = 'primary-search-account-menu';
+
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1280px)' })
+
   const renderMenu = (
     
     <Menu
@@ -201,11 +206,26 @@ export default function Navbar() {
             BestBuy
             </Link>
           </Typography>
-          <div>
+          <div className="nav-search-bar">
           <SearchBar/>
           </div>
+          
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          {
+            isTabletOrMobile && <div>
+            <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={()=>history.push("/search")}
+                color="inherit"
+              >
+                <Search/>
+              </IconButton>
+            </div>
+          }
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={itemsInCart.length} color="secondary">
                 
@@ -226,6 +246,18 @@ export default function Navbar() {
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
+          <div>
+          <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={()=>history.push("/search")}
+              color="inherit"
+            >
+              <Search/>
+            </IconButton>
+          </div>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
