@@ -82,7 +82,6 @@ export default function SingleProduct({match}) {
             <li>{product.processor? product.processor:"Not Available"}</li>
             <li>Operating System: {product.operatingSystem? product.operatingSystem:"Not Available"}</li>
             <li>Launch Date: {product.addDate? product.addDate:"Not Available"}</li>
-            
            </ul>
           
           </Typography>
